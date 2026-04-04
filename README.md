@@ -3,8 +3,8 @@
 ## Project Overview
 
 **Project Title**: Retail Sales Analysis  
-**Level**: Beginner  
-**Database**: `p1_retail_db`
+**Level**: Intermediate  
+
 
 This project is designed to demonstrate SQL skills and techniques typically used by data analysts to explore, clean, and analyze retail sales data. The project involves setting up a retail sales database, performing exploratory data analysis (EDA), and answering specific business questions through SQL queries. This project is ideal for those who are starting their journey in data analysis and want to build a solid foundation in SQL.
 
@@ -23,7 +23,7 @@ This project is designed to demonstrate SQL skills and techniques typically used
 - **Table Creation**: A table named `retail_sales` is created to store the sales data. The table structure includes columns for transaction ID, sale date, sale time, customer ID, gender, age, product category, quantity sold, price per unit, cost of goods sold (COGS), and total sale amount.
 
 ```sql
-CREATE DATABASE p1_retail_db;
+CREATE DATABASE retail_sales;
 
 CREATE TABLE retail_sales
 (
@@ -49,6 +49,12 @@ CREATE TABLE retail_sales
 - **Null Value Check**: Check for any null values in the dataset and delete records with missing data.
 
 ```sql
+ALTER TABLE retail_sales
+RENAME COLUMN ï»¿transactions_id TO transaction_id;
+
+ALTER TABLE retail_sales
+RENAME COLUMN quantiy TO quantity;
+
 SELECT COUNT(*) FROM retail_sales;
 SELECT COUNT(DISTINCT customer_id) FROM retail_sales;
 SELECT DISTINCT category FROM retail_sales;
@@ -85,7 +91,7 @@ FROM retail_sales
 WHERE 
     category = 'Clothing'
     AND 
-    TO_CHAR(sale_date, 'YYYY-MM') = '2022-11'
+    date_format(sale_date, '%Y-%m')='2022-11'
     AND
     quantity >= 4
 ```
@@ -140,11 +146,11 @@ SELECT
     EXTRACT(YEAR FROM sale_date) as year,
     EXTRACT(MONTH FROM sale_date) as month,
     AVG(total_sale) as avg_sale,
-    RANK() OVER(PARTITION BY EXTRACT(YEAR FROM sale_date) ORDER BY AVG(total_sale) DESC) as rank
+    RANK() OVER(PARTITION BY EXTRACT(YEAR FROM sale_date) ORDER BY AVG(total_sale) DESC) as rankk
 FROM retail_sales
 GROUP BY 1, 2
 ) as t1
-WHERE rank = 1
+WHERE rankk = 1
 ```
 
 8. **Write a SQL query to find the top 5 customers based on the highest total sales **:
@@ -211,17 +217,14 @@ This project serves as a comprehensive introduction to SQL for data analysts, co
 3. **Run the Queries**: Use the SQL queries provided in the `analysis_queries.sql` file to perform your analysis.
 4. **Explore and Modify**: Feel free to modify the queries to explore different aspects of the dataset or answer additional business questions.
 
-## Author - Zero Analyst
+## Author - Hanzala Raja
 
 This project is part of my portfolio, showcasing the SQL skills essential for data analyst roles. If you have any questions, feedback, or would like to collaborate, feel free to get in touch!
 
-### Stay Updated and Join the Community
+🤝 Let's Connect If you found this project useful or want to collaborate:
 
-For more content on SQL, data analysis, and other data-related topics, make sure to follow me on social media and join our community:
+💼 LinkedIn: https://www.linkedin.com/in/hanzalaraja/ 📧 Email: hanzala.analyst@gmail.com
 
-- **YouTube**: [Subscribe to my channel for tutorials and insights](https://www.youtube.com/@zero_analyst)
-- **Instagram**: [Follow me for daily tips and updates](https://www.instagram.com/zero_analyst/)
-- **LinkedIn**: [Connect with me professionally](https://www.linkedin.com/in/najirr)
-- **Discord**: [Join our community to learn and grow together](https://discord.gg/36h5f2Z5PK)
+⭐ Support If you like this project, don’t forget to star ⭐ the repository and share your feedback!
 
-Thank you for your support, and I look forward to connecting with you!
+
